@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.service.users.io.AuthRequest;
+import com.service.users.io.AuthResponse;
 import com.service.users.service.AppUserDetailsService;
 import com.service.users.service.UserService;
 import com.service.users.utility.JwtUtil;
@@ -58,11 +60,11 @@ public class AuthController {
         catch(DisabledException ex) { // if account disabled, use this
             Map<String, Object> error = new HashMap<>();                        
             error.put("error", true);
-            error.put("message", "account is disabled lol");
+            error.put("message", "account is disabled");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(error);
 
         } 
-        catch(Exception ex) { // idk bout ts imma be fr
+        catch(Exception ex) { // for unauthorized attemps
             Map<String, Object> error = new HashMap<>();                        
             error.put("error", true);
             error.put("message", "authorization failed");
