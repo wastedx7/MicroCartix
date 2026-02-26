@@ -28,7 +28,7 @@ public class UserServiceImplementation implements UserService {
             userEntity = userRepository.save(userEntity);
             return convertToResponseEntity(userEntity);
         }
-        throw new ResponseStatusException(HttpStatusCode.valueOf(409), "user with this email already exists");
+        throw new ResponseStatusException(HttpStatusCode.valueOf(409), "user with this email already exists, log in instead");
     }
 
     private UserEntity convertToUserEntity(RegisterRequest request){
