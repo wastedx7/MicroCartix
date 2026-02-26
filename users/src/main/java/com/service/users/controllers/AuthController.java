@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.service.users.io.AuthRequest;
 import com.service.users.io.AuthResponse;
 import com.service.users.service.AppUserDetailsService;
-import com.service.users.service.UserService;
 import com.service.users.utility.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
