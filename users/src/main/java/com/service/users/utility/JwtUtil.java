@@ -56,6 +56,11 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
+    public String extractRole(String token){
+        Claims claims = extractAllClaims(token);
+        return claims.get("role", String.class);
+    }
+
     public String extractEmail(String token){
         return extractClaims(token, Claims::getSubject);
     }
