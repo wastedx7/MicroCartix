@@ -21,7 +21,6 @@ import org.springframework.web.filter.CorsFilter;
 import com.service.users.filter.JwtFilter;
 import com.service.users.service.AppUserDetailsService;
 
-import jakarta.servlet.FilterChain;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
