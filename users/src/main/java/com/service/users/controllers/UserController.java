@@ -1,5 +1,6 @@
 package com.service.users.controllers;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ public class UserController {
     private final UserService userService;
     private final UserRepository userRepository;
 
+    @PostMapping("/register")
     public RegisterResponse register(@RequestBody RegisterRequest request){
         if (!userRepository.existsByEmail(request.getEmail())){
             return userService.register(request);
