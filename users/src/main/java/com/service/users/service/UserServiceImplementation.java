@@ -10,6 +10,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.service.users.io.RegisterRequest;
 import com.service.users.io.RegisterResponse;
 import com.service.users.model.UserEntity;
+import com.service.users.model.UserRole;
 import com.service.users.repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ public class UserServiceImplementation implements UserService {
             .firstname(request.getFirstname())
             .lastname(request.getLastname())
             .password(passwordEncoder.encode(request.getPassword()))
+            .role(UserRole.CUSTOMER)
             .build();
     }
 
