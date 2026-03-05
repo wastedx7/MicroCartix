@@ -2,6 +2,7 @@ package com.service.users.controllers;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.service.users.io.RegisterRequest;
@@ -10,6 +11,7 @@ import com.service.users.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class UserController {
     
