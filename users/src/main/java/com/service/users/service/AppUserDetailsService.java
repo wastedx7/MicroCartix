@@ -1,6 +1,5 @@
 package com.service.users.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
