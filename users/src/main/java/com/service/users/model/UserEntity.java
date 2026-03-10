@@ -7,20 +7,23 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Table(name = "user_db")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,10 +31,6 @@ public class UserEntity {
 
     @Column(unique = true)
     private String userId;
-    @Column(nullable = false)
-    private String firstname;
-    @Column(nullable = false)
-    private String lastname;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)

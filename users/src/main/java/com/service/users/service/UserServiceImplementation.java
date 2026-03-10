@@ -7,11 +7,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.service.users.io.RegisterRequest;
-import com.service.users.io.RegisterResponse;
-import com.service.users.model.UserEntity;
+import com.service.users.io.CustomerRegistrationRequest;
+import com.service.users.io.CustomerRegistrationResponse;
+import com.service.users.io.SellerRegistrationRequest;
+import com.service.users.io.SellerRegistrationResponse;
+import com.service.users.model.CustomerEntity;
+import com.service.users.model.SellerEntity;
 import com.service.users.model.UserRole;
-import com.service.users.repositories.UserRepository;
+import com.service.users.repositories.CustomerRepository;
+import com.service.users.repositories.SellerRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,21 +23,17 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceImplementation implements UserService {
     
-    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
+    private final SellerRepository sellerRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     
     @Override
-    public RegisterResponse register(RegisterRequest request){
-        UserEntity userEntity = convertToUserEntity(request);
-        if(!userRepository.existsByEmail(request.getEmail())){
-            userEntity = userRepository.save(userEntity);
-            return convertToResponseEntity(userEntity);
+    public CustomerRegistrationResponse registerCustomer(CustomerRegistrationRequest request){
+        if(customerRepository.existsByEmail(request.getEmail())){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(409), "user with this email already exists, log in instead");
         }
-        throw new ResponseStatusException(HttpStatusCode.valueOf(409), "user with this email already exists, log in instead");
-    }
-
-    private UserEntity convertToUserEntity(RegisterRequest request){
-        return UserEntity.builder()
+        
+        CustomerEntity customerEntity = CustomerEntity.builder()
             .userId(UUID.randomUUID().toString())
             .email(request.getEmail())
             .firstname(request.getFirstname())
@@ -41,15 +41,48 @@ public class UserServiceImplementation implements UserService {
             .password(passwordEncoder.encode(request.getPassword()))
             .role(UserRole.CUSTOMER)
             .build();
+        
+        customerEntity = customerRepository.save(customerEntity);
+        return convertToCustomerResponse(customerEntity);
+    }
+    
+    @Override
+    public SellerRegistrationResponse registerSeller(SellerRegistrationRequest request){
+        if(sellerRepository.existsByEmail(request.getEmail())){
+            throw new ResponseStatusException(HttpStatusCode.valueOf(409), "user with this email already exists, log in instead");
+        }
+        
+        SellerEntity sellerEntity = SellerEntity.builder()
+            .userId(UUID.randomUUID().toString())
+            .email(request.getEmail())
+            .sellername(request.getSellername())
+            .shopName(request.getShopName())
+            .shippingAddress(request.getShippingAddress())
+            .password(passwordEncoder.encode(request.getPassword()))
+            .role(UserRole.SELLER)
+            .build();
+        
+        sellerEntity = sellerRepository.save(sellerEntity);
+        return convertToSellerResponse(sellerEntity);
     }
 
-    private RegisterResponse convertToResponseEntity(UserEntity entity){
-        return RegisterResponse.builder()
+    private CustomerRegistrationResponse convertToCustomerResponse(CustomerEntity entity){
+        return CustomerRegistrationResponse.builder()
             .userId(entity.getUserId())
             .firstname(entity.getFirstname())
             .lastname(entity.getLastname())
             .email(entity.getEmail())
             .build();
     }
+    
+    private SellerRegistrationResponse convertToSellerResponse(SellerEntity entity){
+        return SellerRegistrationResponse.builder()
+            .userId(entity.getUserId())
+            .sellername(entity.getSellername())
+            .shopName(entity.getShopName())
+            .email(entity.getEmail())
+            .build();
+    }
 }
+
 

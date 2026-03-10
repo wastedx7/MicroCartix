@@ -1,6 +1,5 @@
 package com.service.users.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -12,16 +11,15 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @SuperBuilder
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "seller_db")
-public class SellerEntity extends UserEntity {
+@Getter
+@Setter
+@Table(name = "customer_db")
+public class CustomerEntity extends UserEntity {
     @Column(nullable = false)
-    private String shippingAddress;
+    private String firstname;
     @Column(nullable = false)
-    private String shopName;
-    @Column(nullable = false)
-    private String sellername;
+    private String lastname;
 }
+
