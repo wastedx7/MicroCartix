@@ -1,5 +1,7 @@
 package com.service.users.configuration;
 
+import java.util.UUID;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -24,6 +26,7 @@ public class AdminDataInitializer implements CommandLineRunner {
             return;
         }
         AdminEntity admin = AdminEntity.builder()
+            .userId(UUID.randomUUID().toString())
             .email(adminEmail)
             .password(passwordEncoder.encode("Admin@123"))
             .role(UserRole.ADMIN)
