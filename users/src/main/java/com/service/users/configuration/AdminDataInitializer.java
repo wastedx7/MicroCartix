@@ -1,5 +1,6 @@
 package com.service.users.configuration;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.boot.CommandLineRunner;
@@ -31,6 +32,7 @@ public class AdminDataInitializer implements CommandLineRunner {
             .userId(UUID.randomUUID().toString())
             .email(adminEmail)
             .password(passwordEncoder.encode("Admin@123"))
+            .createdAt(LocalDateTime.now())
             .role(UserRole.ADMIN)
             .build();
 

@@ -1,5 +1,7 @@
 package com.service.users.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -17,8 +19,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Table(name = "admin_db")
 public class AdminEntity extends UserEntity {
-    @Column(unique = true, nullable = false)
-    private String email;
     @Column(nullable = false)
-    private String password;
+    private LocalDateTime createdAt;
 }
