@@ -12,6 +12,8 @@ import com.service.users.repositories.AdminRepository;
 
 import lombok.RequiredArgsConstructor;
 
+
+// ive made a simple one admin for simplicity 
 @Component
 @RequiredArgsConstructor
 public class AdminDataInitializer implements CommandLineRunner {
