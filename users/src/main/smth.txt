@@ -1,1 +1,21 @@
-need to send mails
+the user app is done now moving onto product service and network discovery
+User Service Summary
+
+The User Service in this project manages user registration for both customers and sellers. It consists of the following components:
+
+1. UserService (interface):
+	 - Defines methods for registering customers and sellers.
+	 - Methods:
+		 * registerCustomer(CustomerRegistrationRequest): Registers a new customer and returns a CustomerRegistrationResponse.
+		 * registerSeller(SellerRegistrationRequest): Registers a new seller and returns a SellerRegistrationResponse.
+
+2. UserServiceImplementation (class):
+	 - Implements UserService interface.
+	 - Handles business logic for registration, including:
+		 * Checking for existing users by email.
+		 * Encoding passwords securely.
+		 * Assigning user roles (CUSTOMER or SELLER).
+		 * Saving user entities to the database.
+		 * Returning registration responses with user details.
+
+The service uses Spring components, repositories for persistence, and ensures unique email registration for both user types.
