@@ -36,7 +36,7 @@ public class SecurityConfig {
         http.cors(Customizer.withDefaults())
             .csrf(csrf->csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/v0/auth/**").permitAll()    // auth available for all
+                .requestMatchers("/api/v0/auth/**","/test").permitAll()    // auth available for all
 
                 .requestMatchers("/api/v0/admin/**").hasRole("ADMIN")   // admin routes
                 
